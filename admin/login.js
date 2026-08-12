@@ -1,33 +1,4 @@
-import { createClient } from
-  "https://esm.sh/@supabase/supabase-js@2";
-
-
-// ==========================================
-// SUPABASE
-// ==========================================
-
-const SUPABASE_URL =
-  "https://vkooufqxtkqwyytocztz.supabase.co";
-
-const SUPABASE_ANON_KEY =
-  "sb_publishable_JZAXgNUK2NoWdHXRla_4dw_oBuAlSzr";
-
-const supabase = createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
-  }
-);
-
-
-// ==========================================
-// ELEMENTS
-// ==========================================
+import { supabase } from "../src/js/supabase.js";
 
 const form =
   document.getElementById("loginForm");
@@ -44,67 +15,62 @@ const loginButton =
 const loginText =
   document.getElementById("loginText");
 
-const message =
+const loginMessage =
   document.getElementById("loginMessage");
 
 
-// ==========================================
+// ========================================
 // MESSAGE
-// ==========================================
+// ========================================
 
-function showMessage(text, type = "error") {
+function showMessage(message, type = "error") {
 
-  message.textContent = text;
+  loginMessage.textContent = message;
 
-  message.className =
+  loginMessage.className =
     `login-message ${type}`;
-
 }
 
 
-// ==========================================
-// CHECK EXISTING SESSION
-// ==========================================
+// ========================================
+// CHECK EXISTING LOGIN
+// ========================================
 
-async function checkSession() {
+async function checkExistingSession() {
 
   const {
-    data: {
-      session
-    },
+    data,
     error
   } = await supabase.auth.getSession();
-
 
   if (error) {
 
     console.error(
-      "Session error:",
+      "Session check error:",
       error
     );
 
     return;
   }
 
+  if (data.session) {
 
-  if (session) {
-
-    window.location.href =
-      "./dashboard.html";
+    window.location.replace(
+      "./dashboard.html"
+    );
   }
 }
 
 
-// ==========================================
+// ========================================
 // LOGIN
-// ==========================================
+// ========================================
 
 form.addEventListener(
   "submit",
   async (event) => {
 
     event.preventDefault();
-
 
     const email =
       emailInput.value.trim();
@@ -116,7 +82,7 @@ form.addEventListener(
     if (!email || !password) {
 
       showMessage(
-        "Please enter your email and password."
+        "Enter your email and password."
       );
 
       return;
@@ -128,7 +94,7 @@ form.addEventListener(
     loginText.textContent =
       "Signing in...";
 
-    showMessage("", "");
+    showMessage("");
 
 
     try {
@@ -137,21 +103,42 @@ form.addEventListener(
         data,
         error
       } = await supabase.auth.signInWithPassword({
-        email,
-        password
+
+        email: email,
+
+        password: password
+
       });
 
 
       if (error) {
 
         console.error(
-          "Login error:",
+          "Supabase login error:",
           error
         );
 
-        showMessage(
-          getLoginError(error)
-        );
+
+        if (
+          error.message
+            .toLowerCase()
+            .includes(
+              "invalid login credentials"
+            )
+        ) {
+
+          showMessage(
+            "Incorrect email or password."
+          );
+
+        } else {
+
+          showMessage(
+            error.message
+          );
+
+        }
+
 
         loginButton.disabled = false;
 
@@ -165,7 +152,7 @@ form.addEventListener(
       if (!data.session) {
 
         showMessage(
-          "Login failed. No session was created."
+          "Login failed: no session was created."
         );
 
         loginButton.disabled = false;
@@ -178,18 +165,18 @@ form.addEventListener(
 
 
       showMessage(
-        "Login successful! Redirecting...",
+        "Login successful!",
         "success"
       );
 
 
-      // Give Supabase a moment to save
-      // the session before redirecting.
+      // Session is now stored by Supabase.
 
       setTimeout(() => {
 
-        window.location.href =
-          "./dashboard.html";
+        window.location.replace(
+          "./dashboard.html"
+        );
 
       }, 500);
 
@@ -202,7 +189,7 @@ form.addEventListener(
       );
 
       showMessage(
-        "Something went wrong. Please try again."
+        "Unable to connect to Supabase."
       );
 
       loginButton.disabled = false;
@@ -215,39 +202,8 @@ form.addEventListener(
 );
 
 
-// ==========================================
-// FRIENDLY ERRORS
-// ==========================================
-
-function getLoginError(error) {
-
-  if (
-    error.message
-      .toLowerCase()
-      .includes("invalid login credentials")
-  ) {
-
-    return "Incorrect email or password.";
-  }
-
-
-  if (
-    error.message
-      .toLowerCase()
-      .includes("email not confirmed")
-  ) {
-
-    return "Please confirm your email address first.";
-  }
-
-
-  return error.message ||
-    "Unable to log in.";
-}
-
-
-// ==========================================
+// ========================================
 // START
-// ==========================================
+// ========================================
 
-checkSession();
+checkExistingSession();
