@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yellow Properties | Add Property</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 72px;
+      background: #111;
+      border-bottom: 1px solid #292929;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 35px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: #f4c400;
+      color: #111;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .back {
+      color: #aaa;
+      text-decoration: none;
+      border: 1px solid #333;
+      padding: 10px 15px;
+      border-radius: 9px;
+    }
+
+    .back:hover {
+      color: #f4c400;
+      border-color: #f4c400;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 45px 20px;
+    }
+
+    .eyebrow {
+      color: #f4c400;
+      font-size: 12px;
+      letter-spacing: 3px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #888;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 18px;
+      padding: 30px;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ddd;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px;
+      background: #0c0c0c;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 10px;
+      outline: none;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #f4c400;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    /* IMAGE AREA */
+
+    .image-box {
+      border: 2px dashed #3a3a3a;
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+      background: #101010;
+      transition: 0.2s;
+    }
+
+    .image-box.dragging {
+      border-color: #f4c400;
+      background: #171500;
+    }
+
+    .paste-text {
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .paste-text strong {
+      color: #f4c400;
+    }
+
+    .file-label {
+      display: inline-block;
+      background: #f4c400;
+      color: #111;
+      padding: 12px 18px;
+      border-radius: 9px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .file-label:hover {
+      background: #ffd92e;
+    }
+
+    #imageFile {
+      display: none;
+    }
+
+    .preview {
+      width: 100%;
+      max-height: 350px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-top: 20px;
+      display: none;
+      background: #080808;
+    }
+
+    .selected-name {
+      margin-top: 12px;
+      color: #888;
+      font-size: 13px;
+      word-break: break-all;
+    }
+
+    .or {
+      text-align: center;
+      color: #555;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+
+    .submit {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #f4c400;
+      color: #111;
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .submit:hover {
+      background: #ffd92e;
+    }
+
+    .submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      text-align: center;
+      min-height: 25px;
+      margin-top: 15px;
+      line-height: 1.5;
+    }
+
+    .success {
+      color: #55dc8b;
+    }
+
+    .error {
+      color: #ff7777;
+    }
+
+    @media (max-width: 650px) {
+      .topbar {
+        padding: 0 18px;
+      }
+
+      .container {
+        padding: 30px 18px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="brand">
+    <div class="logo">Y</div>
+    <div>YELLOW PROPERTIES</div>
+  </div>
+
+  <a href="./dashboard.html" class="back">
+    ← Dashboard
+  </a>
+
+</header>
+
+
+<main class="container">
+
+  <div class="eyebrow">
+    PROPERTY MANAGEMENT
+  </div>
+
+  <h1>Add New Property</h1>
+
+  <p class="subtitle">
+    Add a property and its photos to your listings.
+  </p>
+
+
+  <div class="card">
+
+    <form id="propertyForm">
+
+      <div class="field">
+        <label for="title">Property Title *</label>
+
+        <input
+          id="title"
+          type="text"
+          placeholder="Luxury 5 Marla House"
+          required
+        >
+      </div>
+
+
+      <div class="grid">
+
+        <div class="field">
+          <label for="location">Location *</label>
+
+          <input
+            id="location"
+            type="text"
+            placeholder="Eden Orchard, Lahore"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="price">Price *</label>
+
+          <input
+            id="price"
+            type="text"
+            placeholder="PKR 2.5 Crore"
+            required
+          >
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+        <div class="field">
+          <label for="status">Status</label>
+
+          <select id="status">
+            <option value="Available">Available</option>
+            <option value="Sold">Sold</option>
+            <option value="Reserved">Reserved</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="propertyType">Property Type</label>
+
+          <select id="propertyType">
+            <option value="House">House</option>
+            <option value="Plot">Plot</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Farm House">Farm House</option>
+        </select>
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+        <div class="field">
+          <label for="bedrooms">Bedrooms</label>
+
+          <input
+            id="bedrooms"
+            type="number"
+            min="0"
+            placeholder="4"
+          >
+        </div>
+
+        <div class="field">
+          <label for="bathrooms">Bathrooms</label>
+
+          <input
+            id="bathrooms"
+            type="number"
+            min="0"
+            placeholder="3"
+          >
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="area">Area</label>
+
+        <input
+          id="area"
+          type="text"
+          placeholder="5 Marla"
+        >
+
+      </div>
+
+
+      <!-- IMAGE -->
+
+      <div class="field">
+
+        <label>Property Photo</label>
+
+        <div
+          id="imageBox"
+          class="image-box"
+          tabindex="0"
+        >
+
+          <div class="paste-text">
+            <strong>Copy a photo</strong> on your computer
+            and press <strong>Ctrl + V</strong> here.
+            <br>
+            You can also choose a file below.
+          </div>
+
+          <label
+            for="imageFile"
+            class="file-label"
+          >
+            📁 Choose Photo
+          </label>
+
+          <input
+            id="imageFile"
+            type="file"
+            accept="image/*"
+          >
+
+          <img
+            id="preview"
+            class="preview"
+            alt="Property preview"
+          >
+
+          <div
+            id="selectedName"
+            class="selected-name"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="or">
+        — OR USE AN IMAGE URL —
+      </div>
+
+
+      <div class="field">
+
+        <input
+          id="imageUrl"
+          type="url"
+          placeholder="https://example.com/property.jpg"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="description">
+          Description
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="Describe the property..."
+        ></textarea>
+
+      </div>
+
+
+      <button
+        id="submitBtn"
+        class="submit"
+        type="submit"
+      >
+        Add Property
+      </button>
+
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+    </form>
+
+  </div>
+
+</main>
+
+
+<script
+  type="module"
+  src="./add-property.js"
+></script>
+
+</body>
+</html>

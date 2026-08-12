@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Yellow Properties | Admin</title>
+
+
+  <script type="module" crossorigin src="/assets/admin-BSYQuNV1.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/admin-DbbDtJTu.css">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section
+  id="loginScreen"
+  class="login-screen"
+>
+
+  <div class="login-card">
+
+    <div class="admin-logo">
+      Y
+    </div>
+
+    <div class="login-brand">
+      YELLOW PROPERTIES
+    </div>
+
+    <div class="login-subtitle">
+      ADMIN PANEL
+    </div>
+
+
+    <form id="loginForm">
+
+      <label>
+        Username
+      </label>
+
+      <input
+        id="username"
+        type="text"
+        placeholder="Admin username"
+        required
+      >
+
+
+      <label>
+        Password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="admin-btn yellow"
+      >
+        Sign In
+      </button>
+
+
+      <p
+        id="loginError"
+        class="login-error"
+      ></p>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN APP
+===================================================== -->
+
+<div
+  id="adminApp"
+  class="admin-app hidden"
+>
+
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+      <div class="admin-logo small">
+        Y
+      </div>
+
+      <div>
+
+        <strong>
+          YELLOW
+        </strong>
+
+        <span>
+          PROPERTIES
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <nav>
+
+      <button
+        class="side-link active"
+        data-section="dashboard"
+      >
+        <span>▦</span>
+        Dashboard
+      </button>
+
+
+      <button
+        class="side-link"
+        data-section="properties"
+      >
+        <span>⌂</span>
+        Properties
+      </button>
+
+
+      <button
+        class="side-link"
+        data-section="addProperty"
+      >
+        <span>＋</span>
+        Add Property
+      </button>
+
+
+      <a
+        href="/"
+        target="_blank"
+        class="side-link"
+      >
+        <span>↗</span>
+        View Website
+      </a>
+
+    </nav>
+
+
+    <button
+      id="logoutBtn"
+      class="logout-btn"
+    >
+      Logout
+    </button>
+
+  </aside>
+
+
+
+  <!-- MAIN -->
+
+  <main class="admin-main">
+
+
+    <!-- TOP BAR -->
+
+    <header class="admin-header">
+
+      <div>
+
+        <span class="admin-eyebrow">
+          YELLOW PROPERTIES
+        </span>
+
+        <h1 id="pageTitle">
+          Dashboard
+        </h1>
+
+      </div>
+
+
+      <div class="admin-user">
+
+        <div class="user-avatar">
+          A
+        </div>
+
+        <div>
+
+          <strong>
+            Administrator
+          </strong>
+
+          <span>
+            Property Manager
+          </span>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         DASHBOARD
+    ================================================= -->
+
+    <section
+      id="dashboardSection"
+      class="admin-section"
+    >
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <span>
+            TOTAL PROPERTIES
+          </span>
+
+          <strong id="totalProperties">
+            0
+          </strong>
+
+          <small>
+            All listings
+          </small>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>
+            FOR SALE
+          </span>
+
+          <strong id="saleProperties">
+            0
+          </strong>
+
+          <small>
+            Active sale listings
+          </small>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>
+            FOR RENT
+          </span>
+
+          <strong id="rentProperties">
+            0
+          </strong>
+
+          <small>
+            Active rental listings
+          </small>
+
+        </div>
+
+
+        <div class="stat-card highlight">
+
+          <span>
+            FEATURED
+          </span>
+
+          <strong id="featuredProperties">
+            0
+          </strong>
+
+          <small>
+            Featured listings
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-grid">
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <span>
+                RECENT PROPERTIES
+              </span>
+
+              <h2>
+                Latest listings
+              </h2>
+
+            </div>
+
+            <button
+              class="text-btn"
+              data-section="properties"
+            >
+              View all →
+            </button>
+
+          </div>
+
+
+          <div id="recentProperties">
+          </div>
+
+        </div>
+
+
+        <div class="panel quick-panel">
+
+          <span>
+            QUICK ACTIONS
+          </span>
+
+          <h2>
+            Manage website
+          </h2>
+
+
+          <button
+            class="quick-action"
+            data-section="addProperty"
+          >
+            <span>＋</span>
+
+            <div>
+              <strong>
+                Add Property
+              </strong>
+
+              <small>
+                Create a new listing
+              </small>
+            </div>
+
+          </button>
+
+
+          <a
+            href="/"
+            target="_blank"
+            class="quick-action"
+          >
+
+            <span>↗</span>
+
+            <div>
+
+              <strong>
+                View Website
+              </strong>
+
+              <small>
+                Open live website
+              </small>
+
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PROPERTIES
+    ================================================= -->
+
+    <section
+      id="propertiesSection"
+      class="admin-section hidden"
+    >
+
+      <div class="section-toolbar">
+
+        <div>
+
+          <span>
+            PROPERTY MANAGEMENT
+          </span>
+
+          <h2>
+            All Properties
+          </h2>
+
+        </div>
+
+
+        <button
+          class="admin-btn yellow"
+          data-section="addProperty"
+        >
+          + Add Property
+        </button>
+
+      </div>
+
+
+      <div class="property-table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Property
+              </th>
+
+              <th>
+                Type
+              </th>
+
+              <th>
+                Purpose
+              </th>
+
+              <th>
+                Price
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="propertyTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ADD / EDIT PROPERTY
+    ================================================= -->
+
+    <section
+      id="addPropertySection"
+      class="admin-section hidden"
+    >
+
+      <div class="section-toolbar">
+
+        <div>
+
+          <span>
+            PROPERTY MANAGEMENT
+          </span>
+
+          <h2 id="formTitle">
+            Add Property
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <form
+        id="propertyForm"
+        class="property-form"
+      >
+
+        <input
+          type="hidden"
+          id="propertyId"
+        >
+
+
+        <div class="form-grid">
+
+
+          <div class="form-card">
+
+            <h3>
+              Property Information
+            </h3>
+
+
+            <label>
+              Property Title
+            </label>
+
+            <input
+              id="propertyTitle"
+              type="text"
+              placeholder="e.g. Luxury 10 Marla House"
+              required
+            >
+
+
+            <label>
+              Location
+            </label>
+
+            <input
+              id="propertyLocation"
+              type="text"
+              placeholder="Eden Orchard, Faisalabad"
+              required
+            >
+
+
+            <div class="two-columns">
+
+              <div>
+
+                <label>
+                  Property Type
+                </label>
+
+                <select id="propertyType">
+
+                  <option value="House">
+                    House
+                  </option>
+
+                  <option value="Plot">
+                    Plot
+                  </option>
+
+                  <option value="Commercial">
+                    Commercial
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div>
+
+                <label>
+                  Purpose
+                </label>
+
+                <select id="propertyPurpose">
+
+                  <option value="Sale">
+                    Sale
+                  </option>
+
+                  <option value="Rent">
+                    Rent
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <label>
+              Price
+            </label>
+
+            <input
+              id="propertyPrice"
+              type="text"
+              placeholder="PKR 25,000,000"
+            >
+
+
+            <div class="two-columns">
+
+              <div>
+
+                <label>
+                  Bedrooms
+                </label>
+
+                <input
+                  id="propertyBeds"
+                  type="text"
+                  placeholder="4 Beds"
+                >
+
+              </div>
+
+
+              <div>
+
+                <label>
+                  Bathrooms
+                </label>
+
+                <input
+                  id="propertyBaths"
+                  type="text"
+                  placeholder="4 Baths"
+                >
+
+              </div>
+
+            </div>
+
+
+            <label>
+              Area
+            </label>
+
+            <input
+              id="propertyArea"
+              type="text"
+              placeholder="10 Marla"
+            >
+
+          </div>
+
+
+
+          <div class="form-card">
+
+            <h3>
+              Property Image
+            </h3>
+
+
+            <label>
+              Image URL
+            </label>
+
+            <input
+              id="propertyImage"
+              type="text"
+              placeholder="/images/property1.jpg"
+            >
+
+
+            <div
+              id="imagePreview"
+              class="image-preview"
+            >
+
+              <span>
+                Image preview
+              </span>
+
+            </div>
+
+
+            <label class="checkbox-row">
+
+              <input
+                id="propertyFeatured"
+                type="checkbox"
+              >
+
+              <span>
+                Mark as featured
+              </span>
+
+            </label>
+
+
+            <label class="checkbox-row">
+
+              <input
+                id="propertyVisible"
+                type="checkbox"
+                checked
+              >
+
+              <span>
+                Show on website
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            id="cancelEdit"
+            class="admin-btn dark"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            type="submit"
+            class="admin-btn yellow"
+          >
+            Save Property
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+
+</body>
+
+</html>
