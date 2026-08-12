@@ -1,240 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Yellow Properties | Admin Login</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(
-          circle at top right,
-          rgba(245, 196, 0, 0.12),
-          transparent 35%
-        ),
-        #0b0b0b;
-      color: white;
-      padding: 20px;
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 430px;
-      background: #151515;
-      border: 1px solid #2b2b2b;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
-    }
-
-    .logo {
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f4c400;
-      color: #111;
-      border-radius: 14px;
-      font-size: 30px;
-      font-weight: 900;
-      margin-bottom: 25px;
-    }
-
-    .brand {
-      font-size: 13px;
-      letter-spacing: 3px;
-      color: #f4c400;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: #888;
-      margin-bottom: 32px;
-    }
-
-    .field {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #ccc;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px 15px;
-      background: #0d0d0d;
-      color: white;
-      border: 1px solid #333;
-      border-radius: 10px;
-      outline: none;
-      font-size: 15px;
-      transition: 0.2s;
-    }
-
-    input:focus {
-      border-color: #f4c400;
-      box-shadow: 0 0 0 3px rgba(244, 196, 0, 0.08);
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: #f4c400;
-      color: #111;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      background: #ffd92e;
-      transform: translateY(-1px);
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .error {
-      min-height: 22px;
-      margin-top: 15px;
-      color: #ff6b6b;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .back {
-      display: block;
-      margin-top: 25px;
-      text-align: center;
-      color: #777;
-      font-size: 14px;
-      text-decoration: none;
-    }
-
-    .back:hover {
-      color: #f4c400;
-    }
-
-    .success {
-      color: #53d88a;
-    }
-
-    @media (max-width: 500px) {
-      .login-card {
-        padding: 30px 22px;
-      }
-    }
-  </style>
-  <script type="module" crossorigin src="/assets/login-C_fYvHLO.js"></script>
+
+  <script type="module" crossorigin src="/assets/login-DXC5dUxR.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/admin-DbbDtJTu.css">
 </head>
 
 <body>
 
-  <div class="login-card">
+  <div class="login-page">
 
-    <div class="logo">Y</div>
+    <div class="login-card">
 
-    <div class="brand">
-      YELLOW PROPERTIES
+      <div class="login-logo">
+        Y
+      </div>
+
+      <div class="login-header">
+        <span>YELLOW PROPERTIES</span>
+        <h1>Admin Login</h1>
+        <p>Sign in to manage your property listings.</p>
+      </div>
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <label for="email">Email</label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="admin@example.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button
+          type="submit"
+          id="loginButton"
+        >
+          <span id="loginText">Login</span>
+        </button>
+
+        <div
+          id="loginMessage"
+          class="login-message"
+        ></div>
+
+      </form>
+
     </div>
-
-    <h1>Admin Login</h1>
-
-    <p class="subtitle">
-      Sign in to manage your property listings.
-    </p>
-
-    <form id="loginForm">
-
-      <div class="field">
-
-        <label for="email">
-          Admin Email
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          placeholder="admin@example.com"
-          autocomplete="email"
-          required
-        >
-
-      </div>
-
-      <div class="field">
-
-        <label for="password">
-          Password
-        </label>
-
-        <input
-          type="password"
-          id="password"
-          placeholder="Enter your password"
-          autocomplete="current-password"
-          required
-        >
-
-      </div>
-
-      <button
-        type="submit"
-        id="loginButton"
-      >
-        Sign In
-      </button>
-
-      <div
-        id="loginMessage"
-        class="error"
-      ></div>
-
-    </form>
-
-    <a
-      href="/"
-      class="back"
-    >
-      ← Back to Yellow Properties
-    </a>
 
   </div>
 
 
 </body>
-
 </html>
